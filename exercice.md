@@ -1,15 +1,23 @@
-Message Formatter
+Process Notifications
 
-As Textio evolves, the team has decided to introduce a new feature for custom
-message formats. Depending on the user's preferences, messages can be sent in
-different formats, such as plain text, markdown, code, or even encrypted text.
-To efficiently manage this, you'll implement a system using interfaces.
+Textio now has a system to process different types of notifications: direct
+messages, group messages, and system alerts. Each notification type has a unique
+way of calculating its importance score based on user interaction and content.
 Assignment
 
-Implement the Formatter interface with a method Format that returns a formatted string.
-Define structs that satisfy the Formatter interface: PlainText, Bold, Code.
-    The structs must all have a message field of type string
+Implement the importance methods for each message type. They should return the
+importance score for each message type.
 
-PlainText should return the message as is.
-Bold should wrap the message in two asterisks (**) to simulate bold text (e.g., message).
-Code should wrap the message in a single backtick (`) to simulate code block (e.g., message)
+For a directMessage the importance score is based on if the message isUrgent or
+not. If it is urgent, the importance score is 50 otherwise the importance score
+is equal to the DM's priorityLevel. For a groupMessage the importance score is
+based on the messages priorityLevel All systemAlert messages should return a 100
+importance score.
+
+Complete the processNotification function. It should identify the type and
+return different values for each type
+
+For a directMessage, return the sender's username and importance score. For a
+groupMessage, return the group's name and the importance score. For an
+systemAlert, return the alert code and the importance score. If the notification
+does not match any known type, return an empty string and a score of 0.
